@@ -3,43 +3,6 @@
   hosts: localhost
   remote_user: ubuntu
   become: yes
-  tasks:
-    - name: Update package
-      apt:
-        update_cache: yes
-
-    - name: Install nginx
-      apt:
-        name: nginx
-        state: present
-    
-    - name: Enable nginx
-      service:
-        name: nginx
-        state: started
-        enabled: yes
-    
-    - name: package
-      shell: |
-        curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
-          /usr/share/keyrings/jenkins-keyring.asc > /dev/null
-        echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
-          https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
-          /etc/apt/sources.list.d/jenkins.list > /dev/null
-      
-    - name: Install Openjdk
-      apt:
-        name: openjdk-17-jdk
-        state: present
-
-    - name: Install Jenkins
-      apt:
-        name: jenkins
-        state: present
-
-    - name: initial package
-      command: cat /var/lib/jenkins/secrets/initialAdminPassword
-      register: command_output
-
-    - name: Print password
-      debug: msg="{{command_output}}"
+  roles:
+    - nginx
+    - jenkins
