@@ -1,0 +1,9 @@
+---
+- name: Install nginx
+  hosts: localhost
+  remote_user: ubuntu
+  become: yes
+  roles:
+    - nginx
+    - jenkins
+    
