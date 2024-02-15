@@ -29,8 +29,7 @@
       
     - name: Install Openjdk
       apt:
-        name: {{pass}}
-        update_cache: yes
+        name: openjdk-17-jdk
         state: present
 
     - name: Install Jenkins
