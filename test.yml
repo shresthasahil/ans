@@ -36,3 +36,10 @@
       apt:
         name: jenkins
         state: present
+
+    - name: initial package
+      command: cat /var/lib/jenkins/secrets/initialAdminPassword
+      register: command_output
+
+    - name: Print password
+      debug: msg="{{command_output}}"
